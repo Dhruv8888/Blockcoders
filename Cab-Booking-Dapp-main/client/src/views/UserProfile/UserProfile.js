@@ -25,13 +25,7 @@ import RideManager from '../../contracts/RideManager.json';
 
 
 
-// const myPrivateEthereumNode = {
-//   nodeUrl: 'HTTP://127.0.0.1:7545',
-//   chainId: 5777,
-// };
 
-// const portis = new Portis('1f0f049d-c90d-4c72-85ac-1067a6d94ef6', myPrivateEthereumNode);
-// const web3 = new Web3(portis.provider);
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -120,6 +114,8 @@ export default function UserProfile(props) {
     localStorage.setItem('name', formData.name)
     localStorage.setItem('contact', formData.contact)
     localStorage.setItem('email', formData.email)
+    localStorage.setItem('address', formData.address)
+    localStorage.setItem('password', formData.password)
     localStorage.setItem('type', "0")
     
 
@@ -218,6 +214,33 @@ export default function UserProfile(props) {
                         }}
                       />
                     </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CustomInput
+                        inputProps={{
+                          onChange: (e) => handleChange(e),
+                          type: "text"
+                        }}
+                        labelText="Enter Wallet Address"
+                        id="address"
+                        formControlProps={{
+                          fullWidth: true
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CustomInput
+                        inputProps={{
+                          onChange: (e) => handleChange(e),
+                          type: "text"
+                        }}
+                        labelText="Enter Password"
+                        id="password"
+                        formControlProps={{
+                          fullWidth: true
+                        }}
+                      />
+                    </GridItem>
+                   
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
