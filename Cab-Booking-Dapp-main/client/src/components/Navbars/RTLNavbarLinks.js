@@ -45,7 +45,7 @@ export default function RTLNavbarLinks() {
             className: classes.margin + " " + classes.search
           }}
           inputProps={{
-            placeholder: "جستجو...",
+            
             inputProps: {
               "aria-label": "Search"
             }
@@ -64,7 +64,7 @@ export default function RTLNavbarLinks() {
       >
         <Dashboard className={classes.icons} />
         <Hidden mdUp implementation="css">
-          <p className={classes.linkText}>آمارها</p>
+          <p className={classes.linkText}></p>
         </Hidden>
       </Button>
       <div className={classes.manager}>
@@ -78,10 +78,10 @@ export default function RTLNavbarLinks() {
           className={classes.buttonLink}
         >
           <Notifications className={classes.icons} />
-          <span className={classes.notifications}>۵</span>
+          <span className={classes.notifications}></span>
           <Hidden mdUp implementation="css">
             <p onClick={handleToggle} className={classes.linkText}>
-              اعلان‌ها
+              
             </p>
           </Hidden>
         </Button>
@@ -112,31 +112,30 @@ export default function RTLNavbarLinks() {
                       onClick={handleClose}
                       className={classes.dropdownItem}
                     >
-                      محمدرضا به ایمیل شما پاسخ داد
+                     
                     </MenuItem>
                     <MenuItem
                       onClick={handleClose}
                       className={classes.dropdownItem}
                     >
-                      شما ۵ وظیفه جدید دارید
+                      
                     </MenuItem>
                     <MenuItem
                       onClick={handleClose}
                       className={classes.dropdownItem}
                     >
-                      از حالا شما با علیرضا دوست هستید
                     </MenuItem>
                     <MenuItem
                       onClick={handleClose}
                       className={classes.dropdownItem}
                     >
-                      اعلان دیگر
+                  
                     </MenuItem>
                     <MenuItem
                       onClick={handleClose}
                       className={classes.dropdownItem}
                     >
-                      اعلان دیگر
+                  
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
@@ -154,7 +153,7 @@ export default function RTLNavbarLinks() {
       >
         <Person className={classes.icons} />
         <Hidden mdUp implementation="css">
-          <p className={classes.linkText}>حساب کاربری</p>
+          <p className={classes.linkText}></p>
         </Hidden>
       </Button>
     </div>

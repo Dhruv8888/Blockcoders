@@ -11,7 +11,7 @@ import Cloud from "@material-ui/icons/Cloud";
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import image from "assets/img/ride.png";
 import qrcode from "assets/img/qrcode.png";
-
+import ProductList from "views/allDrivers/drivers";
 // core components
 import Table from "components/Table/Table.js";
 import Stepper from '@material-ui/core/Stepper';
@@ -61,6 +61,8 @@ const useStyles = makeStyles((theme) => {
     },
   }
 });
+
+
 function getSteps() {
   if (localStorage.getItem('type') !== null && localStorage.getItem('type') === "0") {
     return [ 'Choose source & destination', 'Enter number of seats', 'Select Driver', 'Picked Up', 'Dropped off' ];
@@ -119,18 +121,19 @@ export default function RideShareSteps(props) {
                   /> */}
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Ride-Share Location
+                      
                   </Typography>
                     {
                       localStorage.getItem("destinationLng") === null ?
                         <Typography variant="body2" color="textSecondary" component="p">
-                          To book a Ride-Share all you would need to do is login to your Ride-Share account and choose a location. Enter your pickup and drop locations and click on ‘Ride Now’.
+                          To book a cab all you would need to do is login to your cab booking account and choose a location. Enter your pickup and drop locations.
                 </Typography>
                         :
 
                         <Typography variant="body2" color="textSecondary" component="p">
                           Time: {localStorage.getItem('time')}<br />
                           Distance: {localStorage.getItem('distance')}<br />
+                          Price: {localStorage.getItem('distance')*5.0}
                         </Typography>
 
                     }
@@ -162,19 +165,22 @@ export default function RideShareSteps(props) {
                 className={classes.textField}
                 onChange={handleNext}
                 value={seats}
-                helperText="Before confirming the booking you would need to choose the number of seats that you would wish to book. You can book up to 2 seats on your Ola Share ride. If you choose to book 2 seats, the pickup and drop location of the co-passenger traveling should be same."
+                helperText="Before confirming the booking you would need to choose the number of seats that you would wish to book."
                 variant="outlined"
               />
             </div>);
-        case 2:
-          return loading ? `` : <div>
-            <CardBody>
+
+
+case 2:
+          return <div>
+            {/* <CardBody>
               <Table
                 tableHeaderColor="primary"
                 tableHead={["Name", "Contact", "Car No.", "Rating", "Amount", "Accept/Decline"]}
                 tableData={selectedDrivers}
               />
-            </CardBody>
+            </CardBody> */}
+            <ProductList/>
           </div>;
         case 3:
           return !confirmed ? `` : <QrReader
@@ -223,92 +229,98 @@ export default function RideShareSteps(props) {
       else if (activeStep === 1) {
         updateSeats(value)
         if (e.key == 'Enter') {
-          rideManager.methods.requestRide(
-            account,
-            [String(localStorage.getItem('sourceLat')), String(localStorage.getItem('sourceLng'))],
-            [String(localStorage.getItem('destinationLat')), String(localStorage.getItem('destinationLng'))],
-            web3.utils.padRight(web3.utils.fromAscii(20 + 0.5 * Number(localStorage.getItem('distance').split(" ")[0])), 64)).send({ from: account })
-            .once('receipt', async (receipt) => {
-              let data = await rideManager.methods.getRiderInfo(account).call({ 'from': account });
-              console.log(data);
-              setRideContractAddress(data[5][data[5].length - 1]);
+          // rideManager.methods.requestRide(
+          //   account,
+          //   [String(localStorage.getItem('sourceLat')), String(localStorage.getItem('sourceLng'))],
+          //   [String(localStorage.getItem('destinationLat')), String(localStorage.getItem('destinationLng'))],
+          //   web3.utils.padRight(web3.utils.fromAscii(20 + 0.5 * Number(localStorage.getItem('distance').split(" ")[0])), 64)).send({ from: account })
+          //   .once('receipt', async (receipt) => {
+          //     let data = await rideManager.methods.getRiderInfo(account).call({ 'from': account });
+          //     console.log(data);
+          //     setRideContractAddress(data[5][data[5].length - 1]);
              
-              setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            });
-
-        }
+          //     
+          //   });
+          return(
+            <>
+              
+            </>
+          );
+        }setActiveStep((prevActiveStep) => prevActiveStep + 1);
       } else if (activeStep === 2) {
-        isLoading(true);
-        axios.post('http://localhost:8000/api/rider/request-ride', {
-          user: {
-            "account": account,
-            "latitude": 25,
-            "longitude": 25
-          }
-        }).then((response) => {
-          console.log(response.data.selectedDrivers);
-          let temp = response.data.selectedDrivers;
-          const tempList = temp.map(data => {
-            return (
-              [
-                web3.utils.hexToUtf8(data.name).trim(),
-                web3.utils.hexToUtf8(data.contact).trim(),
-                web3.utils.hexToUtf8(data.carNo).trim(),
-                data.rating.toString(),
-                "2 ETH", 
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={() => {
-                    setUserSelectedDriver(data.ethAddress);
-                    rideManager.methods.requestDriver(account, data.ethAddress, rideContractAddress).send({ from: account })
-                      .once('receipt', async (receipt) => {
-                        console.log(receipt);
-                        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                      });
-                  }}
-                >
-                  Accept
-              </Button>
-              ]
-            );
-          });
-          console.log(tempList);
-          setSelectedDrivers(tempList);
-          isLoading(false);
-        }).catch((err) => {
-          console.log(err);
-        })
+        // isLoading(true);
+        // axios.post('http://localhost:8000/api/rider/request-ride', {
+        //   user: {
+        //     "account": account,
+        //     "latitude": 25,
+        //     "longitude": 25
+        //   }
+        // }).then((response) => {
+        //   console.log(response.data.selectedDrivers);
+        //   let temp = response.data.selectedDrivers;
+        //   const tempList = temp.map(data => {
+        //     return (
+        //       [
+        //         web3.utils.hexToUtf8(data.name).trim(),
+        //         web3.utils.hexToUtf8(data.contact).trim(),
+        //         web3.utils.hexToUtf8(data.carNo).trim(),
+        //         data.rating.toString(),
+        //         "2 ETH", 
+        //         <Button
+        //           variant="contained"
+        //           color="primary"
+        //           className={classes.button}
+        //           onClick={() => {
+        //             setUserSelectedDriver(data.ethAddress);
+        //             rideManager.methods.requestDriver(account, data.ethAddress, rideContractAddress).send({ from: account })
+        //               .once('receipt', async (receipt) => {
+        //                 console.log(receipt);
+                        
+        //               });
+        //           }}
+        //         >
+        //           Accept
+        //       </Button>
+        //       ]
+        //     );
+        //   });
+        //   console.log(tempList);
+        //   setSelectedDrivers(tempList);
+        //   isLoading(false);
+        // }).catch((err) => {
+        //   console.log(err);
+        // })
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
         props.notifyNotificationListener("Sample")
         // setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
       } else if (activeStep === 3) {
-        const ride = new web3.eth.Contract(Ride.abi, rideContractAddress);
-        let events = await ride.getPastEvents('UpdateConfirmationEvent', { filter: { _riderAddr: account }, fromBlock: 0, toBlock: 'latest' });
-        events = events.filter((event) => {
-          return event.returnValues._riderAddr === account && event.returnValues._driverAddr === userSelectedDriver;
-        });
-        console.log(events);
-        if (events.length > 0) { 
-          alert('Driver has accepted request');
-          ride.methods.updateRiderConfirmation(true).send({ from: account })
-            .once('receipt', async (receipt) => {
-              console.log(receipt);
-            });
-          setConfirmed(true);
+        // const ride = new web3.eth.Contract(Ride.abi, rideContractAddress);
+        // let events = await ride.getPastEvents('UpdateConfirmationEvent', { filter: { _riderAddr: account }, fromBlock: 0, toBlock: 'latest' });
+        // events = events.filter((event) => {
+        //   return event.returnValues._riderAddr === account && event.returnValues._driverAddr === userSelectedDriver;
+        // });
+        // console.log(events);
+        // if (events.length > 0) { 
+        //   alert('Driver has accepted request');
+        //   ride.methods.updateRiderConfirmation(true).send({ from: account })
+        //     .once('receipt', async (receipt) => {
+        //       console.log(receipt);
+        //     });
+        //   setConfirmed(true);
 
-        }
-
+        // }
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
       } else if (activeStep === 4) {
-        const ride = new web3.eth.Contract(Ride.abi, rideContractAddress);
-        ride.methods.updateRideComplete(true).send({ from: account })
-          .once('receipt', async (receipt) => {
-            console.log(receipt);
-            let info = await ride.methods.getRideInfo().call({ from: account });
-            console.log(info);
-            alert('Ride Completed!');
-          });
+        // const ride = new web3.eth.Contract(Ride.abi, rideContractAddress);
+        // ride.methods.updateRideComplete(true).send({ from: account })
+        //   .once('receipt', async (receipt) => {
+        //     console.log(receipt);
+        //     let info = await ride.methods.getRideInfo().call({ from: account });
+        //     console.log(info);
+            
+        //   });
+          alert('Ride Completed!');
       }
     } else {
       //For Driver
@@ -389,7 +401,7 @@ export default function RideShareSteps(props) {
         <GridItem xs={12} sm={12} md={10}>
           <Card>
             <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Enjoy Ride Share</h4>
+              <h4 className={classes.cardTitleWhite}>Enjoy Ride </h4>
               <p className={classes.cardCategoryWhite}>
                 Travel management made secure &amp; easy
               </p>

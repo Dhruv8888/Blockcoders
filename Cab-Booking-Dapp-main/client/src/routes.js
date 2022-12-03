@@ -2,7 +2,7 @@
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LocationOn from "@material-ui/icons/LocationOn";
-
+import Login from "views/Login/login";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
@@ -12,7 +12,7 @@ import Maps from "views/Maps/Maps.js";
 import { DriveEta } from "@material-ui/icons";
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import RideShareSteps from "views/RideShareSteps/RideShareSteps";
-
+import LoginIcon from '@mui/icons-material/Login';
 // core components/views for RTL layout
 
 const dashboardRoutes = [
@@ -25,7 +25,7 @@ const dashboardRoutes = [
   // },
   {
     path: "/steps",
-    name: "Get a Ride",
+    name: "Get a Cab",
     icon: FormatListNumberedIcon,
     component: RideShareSteps,
     layout: "/admin"
@@ -60,7 +60,13 @@ const dashboardRoutes = [
     component: ProductList,
     layout: "/admin"
   },
-  
+  {
+    path: "/login",
+    name: "Login",
+    icon: LoginIcon,
+    component: Login,
+    layout: "/admin"
+  },
 
 
 ];
