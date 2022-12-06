@@ -1,11 +1,12 @@
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
+
 import Person from "@material-ui/icons/Person";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Login from "views/Login/login";
-import Wallet from "Wallet/Wallet"
+import App from "Wallet/Wallet"
+
 // core components/views for Admin layout
-import DashboardPage from "views/Dashboard/Dashboard.js";
+
 import UserProfile from "views/UserProfile/UserProfile.js";
 import DriverProfile from "views/DriverProfile/DriverProfile.js";
 import ProductList from "views/allDrivers/drivers.js"
@@ -17,13 +18,7 @@ import LoginIcon from '@mui/icons-material/Login';
 // core components/views for RTL layout
 
 const dashboardRoutes = [
-  // {
-  //   path: "/dashboard",
-  //   name: "Dashboard",
-  //   icon: Dashboard,
-  //   component: DashboardPage,
-  //   layout: "/admin"
-  // },
+ 
   {
     path: "/steps",
     name: "Get a Cab",
@@ -72,7 +67,7 @@ const dashboardRoutes = [
     path: "/wallet",
     name: "Wallet",
     icon: LoginIcon,
-    component: Wallet,
+    component: App,
     layout: "/admin"
   },
 

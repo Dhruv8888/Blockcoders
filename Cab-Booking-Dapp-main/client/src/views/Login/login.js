@@ -130,20 +130,21 @@
 
 import React, { useEffect } from "react";
 // import { useHistory } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import { redirect } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  // const navigator = useHistory();
+  // const navigator = useNavigate();
 
   useEffect(() => {
     const auth = localStorage.getItem('user');
     console.warn(auth)
-    // if (auth) {
-    //   navigator('/');
-    // }
+    if (auth) {
+      console.warn("Insit e auth .......)))))))'''''");
+    }
   });
 
   const handleLogin = async () => {

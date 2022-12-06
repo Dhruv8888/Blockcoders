@@ -36,10 +36,10 @@ export default function ProductList() {
             <tr className="Drivers-list-main">
               <th>Index</th>
               <th>Name</th>
-              {/* <th>Price</th> */}
+         
               <th>Contact</th>
               <th>Car number</th>
-              <th>Number of seats</th> 
+              {/* <th>Number of seats</th>  */}
               <th>Book</th>
             </tr>
 
@@ -50,14 +50,13 @@ export default function ProductList() {
                     <tr className="Drivers-list-main">
                         <td>{index + 1}</td>
                         <td>{item.name}</td>
-                        {/* <td>{item.email}</td> */}
+           
                         <td>{item.contact}</td>
                         <td>{item.carNo}</td>
-                        <td>{item.noOfSeats}</td>
+                        {/* <td>{item.noOfSeats}</td> */}
                         <td> <Button
                   variant="contained"
-                  color="primary"
-                  
+                  color="primary"                
                   onClick=""
                 >
                   Book me

@@ -1,22 +1,17 @@
 import React from "react";
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
+
 // @material-ui/icons
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
-import CropFreeIcon from '@material-ui/icons/CropFree';
-import image from "assets/img/ride.png";
-import qrcode from "assets/img/qrcode.png";
+
 import ProductList from "views/allDrivers/drivers";
 // core components
 import Table from "components/Table/Table.js";
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
+
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import GridItem from "components/Grid/GridItem.js";
@@ -35,7 +30,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { LocationCity, LocationOn, TvRounded } from "@material-ui/icons";
+import {  LocationOn } from "@material-ui/icons";
 import { CardActionArea, TextField } from "@material-ui/core";
 
 import Ride from '../../contracts/Ride.json';

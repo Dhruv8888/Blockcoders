@@ -1,20 +1,24 @@
 import React from "react";
+
 import { useState } from "react";
 import { ethers } from "ethers";
-import ErrorMessage from "./ErrorMessage";
-import TxList from "./TxList";
+// import ErrorMessage from "./ErrorMessage";
+// import TxList from "./TxList";
 
 const startPayment = async ({ setError, setTxs, ether, addr }) => {
-
     try {
-        console.log("IN start Pagment.......")
         if (!window.ethereum)
             throw new Error("No crypto wallet found. Please install it.");
-        
-        console.log("IN start1 Pagment.......")
-        await window.ethereum.send("eth_requestAccounts");
-        console.log("IN start2 Pagment.......")
+
+        console.warn("start1")
+        // await window.ethereum.send("eth_requestAccounts");
+        let account = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        console.warn("Acout ----->>>",account)
+        console.warn("start2")
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        console.warn("start3")
         const signer = provider.getSigner();
         ethers.utils.getAddress(addr);
         const tx = await signer.sendTransaction({
@@ -29,12 +33,12 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
     }
 };
 
-export default function Wallet() {
+export default function App() {
+    const [address, setAddress] = useState();
     const [error, setError] = useState();
     const [txs, setTxs] = useState([]);
 
     const handleSubmit = async (e) => {
-        console.warn("IN handleSubmit .......")
         e.preventDefault();
         const data = new FormData(e.target);
         setError();
@@ -59,7 +63,7 @@ export default function Wallet() {
                                 type="text"
                                 name="addr"
                                 className="input input-bordered block w-full focus:ring focus:outline-none"
-                                placeholder="Recipient Address"
+                                placeholder={address}
                             />
                         </div>
                         <div className="my-3">

@@ -10,18 +10,15 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import Snackbar from '@material-ui/core/Snackbar';
-import Portis from '@portis/web3';
 import MuiAlert from '@material-ui/lab/Alert';
-import Web3 from 'web3';
-import avatar from "assets/img/faces/marc.jpg";
-import { FormControl, TableBody, TableContainer, Table, TableCell, TableRow } from "@material-ui/core";
-import Paper from '@material-ui/core/Paper';
+
+import {  TableCell, TableRow } from "@material-ui/core";
+
 import Loader from '../../components/Loader/Loader';
-import RideManager from '../../contracts/RideManager.json';
+
 
 
 
