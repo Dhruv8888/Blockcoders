@@ -112,6 +112,7 @@ export default function DriverProfile(props) {
       localStorage.setItem('email', formData.email)
       localStorage.setItem('carNo', "MH1234")
       localStorage.setItem('noOfSeats', formData.noOfSeats)
+      localStorage.setItem('address', formData.address)
       localStorage.setItem('rating', formData.rating)
       localStorage.setItem('type', "1")
 
@@ -132,7 +133,7 @@ export default function DriverProfile(props) {
 
   const collectData = async () => {
     console.warn("Here is the data :-> ")
-    console.warn(formData.name, formData.email, formData.contact, formData.carNo, formData.noOfSeats, formData.rating, formData.type);
+    console.warn(formData.name, formData.email, formData.contact, formData.carNo, formData.noOfSeats, formData.rating, formData.type, formData.address);
     let result = await fetch('http://localhost:3000/registerDriver', {
       method: 'post',
       body: JSON.stringify({ formData }),
@@ -235,6 +236,19 @@ export default function DriverProfile(props) {
                       }}
                     />
                   </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      inputProps={{
+                        onChange: (e) => handleChange(e),
+                        type: "text"
+                      }}
+                      labelText="Enter Wallet Address"
+                      id="address"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                    />
+                  </GridItem>
                 </GridContainer>
               </CardBody>
               <CardFooter>
@@ -243,59 +257,7 @@ export default function DriverProfile(props) {
             </Card>
           </form>
         </GridItem>
-        {
-          show && <GridItem xs={12} sm={12} md={5}>
-            <Card profile>
-              <CardAvatar profile>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
-                </a>
-              </CardAvatar>
-              <CardBody profile>
-                <p className={classes.cardCategory}>DRIVER</p>
-                <h4 className={classes.cardTitle}>{formData.name}</h4>
-                <p className={classes.description}>
-                  <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="customized table">
-                      <TableBody>
-                        <StyledTableRow>
-                          <StyledTableCell component="th" scope="row">
-                            Contact
-                        </StyledTableCell>
-                          <StyledTableCell align="right">{formData.contact}</StyledTableCell>
-                        </StyledTableRow>
-                        <StyledTableRow>
-                          <StyledTableCell component="th" scope="row">
-                            Email Address
-                        </StyledTableCell>
-                          <StyledTableCell align="right">{formData.email}</StyledTableCell>
-
-                        </StyledTableRow>
-                        <StyledTableRow>
-                          <StyledTableCell component="th" scope="row">
-                            Car Number
-                        </StyledTableCell>
-                          <StyledTableCell align="right">{formData.carNo}</StyledTableCell>
-
-                        </StyledTableRow>
-                        <StyledTableRow>
-                          <StyledTableCell component="th" scope="row">
-                            Number of Seats
-                        </StyledTableCell>
-                          <StyledTableCell align="right">{formData.noOfSeats}</StyledTableCell>
-                        </StyledTableRow>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </p>
-
-                <Button color="primary" round onClick={e => e.preventDefault()}>
-                  Edit
-              </Button>
-              </CardBody>
-            </Card>
-          </GridItem>
-        }
+       
       </GridContainer>
     </div >
   );

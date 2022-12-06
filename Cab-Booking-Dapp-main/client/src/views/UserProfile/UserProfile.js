@@ -86,9 +86,7 @@ export default function UserProfile(props) {
   })
 
 
-  // console.warn(formData.name)
-  // console.warn(formData.contact)
-  // console.warn(formData.email)
+
 
 
   const handleSuccess = () => {
@@ -114,7 +112,6 @@ export default function UserProfile(props) {
     localStorage.setItem('name', formData.name)
     localStorage.setItem('contact', formData.contact)
     localStorage.setItem('email', formData.email)
-    localStorage.setItem('address', formData.address)
     localStorage.setItem('password', formData.password)
     localStorage.setItem('type', "0")
     
@@ -214,19 +211,7 @@ export default function UserProfile(props) {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
-                      <CustomInput
-                        inputProps={{
-                          onChange: (e) => handleChange(e),
-                          type: "text"
-                        }}
-                        labelText="Enter Wallet Address"
-                        id="address"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                      />
-                    </GridItem>
+                  
                     <GridItem xs={12} sm={12} md={12}>
                       <CustomInput
                         inputProps={{
@@ -249,45 +234,7 @@ export default function UserProfile(props) {
               </Card>
             </form>
           </GridItem>
-          {
-            show && <GridItem xs={12} sm={12} md={5} >
-              <Card profile>
-                <CardAvatar profile>
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
-                    <img src={avatar} alt="..." />
-                  </a>
-                </CardAvatar>
-                <CardBody profile>
-                  <p className={classes.cardCategory}>USER</p>
-                  <h4 className={classes.cardTitle}>{formData.name}</h4>
-                  <p className={classes.description}>
-                    <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="customized table">
-                        <TableBody>
-                          <StyledTableRow>
-                            <StyledTableCell component="th" scope="row">
-                              Contact
-                        </StyledTableCell>
-                            <StyledTableCell align="right">{formData.contact}</StyledTableCell>
-                          </StyledTableRow>
-                          <StyledTableRow>
-                            <StyledTableCell component="th" scope="row">
-                              Email Address
-                        </StyledTableCell>
-                            <StyledTableCell align="right">{formData.email}</StyledTableCell>
-
-                          </StyledTableRow>
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </p>
-                  <Button color="primary" round onClick={e => e.preventDefault()}>
-                    Edit
-              </Button>
-                </CardBody>
-              </Card>
-            </GridItem>
-          }
+         
         </GridContainer>
       </div >
     );

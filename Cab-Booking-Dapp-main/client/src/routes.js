@@ -3,6 +3,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Login from "views/Login/login";
+import Wallet from "Wallet/Wallet"
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
@@ -65,6 +66,13 @@ const dashboardRoutes = [
     name: "Login",
     icon: LoginIcon,
     component: Login,
+    layout: "/admin"
+  },
+  {
+    path: "/wallet",
+    name: "Wallet",
+    icon: LoginIcon,
+    component: Wallet,
     layout: "/admin"
   },
 
